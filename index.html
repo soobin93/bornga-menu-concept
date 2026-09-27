@@ -38,7 +38,7 @@ img{display:block;max-width:100%}
 
 .app{width:390px;height:844px;max-height:calc(100vh - 48px);background:var(--bg);position:relative;
   overflow:hidden;border-radius:20px;box-shadow:0 0 0 1px var(--bd),0 24px 60px -24px rgba(0,0,0,.25)}
-@media (max-width:759px){.app{width:100%;height:100vh;max-height:none;border-radius:0;box-shadow:none}}
+@media (max-width:759px){.app{width:100%;height:100vh;height:100dvh;max-height:none;border-radius:0;box-shadow:none}}
 
 .topbar{position:absolute;top:0;left:0;right:0;z-index:25;height:48px;display:flex;align-items:center;gap:9px;
   padding:0 14px;background:var(--bg);border-bottom:1px solid var(--bd);
@@ -57,7 +57,8 @@ img{display:block;max-width:100%}
   display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.18);transition:transform .12s var(--e)}
 .float:active{transform:scale(.94)}
 .float svg{width:16px;height:16px;fill:none;stroke:var(--fg);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.f-find{right:56px}.f-hist{right:14px}
+.f-lang{right:14px;width:auto;padding:0 11px;font-size:12px;font-weight:600;letter-spacing:-.01em}
+.f-find{right:98px}.f-hist{right:56px}
 .f-table{left:14px;width:auto;padding:0 11px;font-size:12px;font-weight:600;letter-spacing:-.01em}
 
 /* ── scroll ───────────────────────────────────────────── */
@@ -66,7 +67,8 @@ img{display:block;max-width:100%}
 
 .hero{height:172px;background:var(--subtle2);overflow:hidden;position:relative}
 .hero img{width:100%;height:100%;object-fit:cover}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 46%)}
+.hero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,0) 42%)}
 
 .head{padding:20px 16px 0}
 .head h1{font-size:28px;font-weight:600;letter-spacing:-.042em;margin:0;line-height:1.1;text-wrap:balance}
@@ -138,7 +140,8 @@ img{display:block;max-width:100%}
 .empty{padding:60px 0;text-align:center;color:var(--fg3);font-size:13.5px}
 
 /* ── bottom bar ───────────────────────────────────────── */
-.bottom{position:absolute;left:0;right:0;bottom:0;z-index:26;padding:12px 16px 20px;background:var(--bg);
+.bottom{position:absolute;left:0;right:0;bottom:0;z-index:26;background:var(--bg);
+  padding:12px 16px calc(20px + env(safe-area-inset-bottom));
   border-top:1px solid var(--bd);transform:translateY(102%);transition:transform .32s var(--e)}
 .bottom.on{transform:none}
 .cta{width:100%;background:var(--fg);color:#fff;border-radius:999px;padding:14px 18px;display:flex;
@@ -154,19 +157,21 @@ img{display:block;max-width:100%}
 /* ── sheet ────────────────────────────────────────────── */
 .scrim{position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.4);opacity:0;pointer-events:none}
 .scrim.on{pointer-events:auto}
-.sheet{position:absolute;left:0;right:0;bottom:0;z-index:41;height:auto;max-height:92%;border-radius:16px 16px 0 0;
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:41;height:auto;max-height:86%;border-radius:16px 16px 0 0;
   background:var(--bg);box-shadow:0 -4px 32px rgba(0,0,0,.18);display:flex;flex-direction:column;
   transform:translateY(110%);will-change:transform;touch-action:none}
 .grip{flex:none;padding:10px 0 2px;display:grid;place-items:center;cursor:grab}
 .grip i{width:36px;height:4px;border-radius:2px;background:var(--bd2);display:block}
 .shead{flex:none;display:flex;align-items:center;gap:8px;padding:8px 16px 12px}
 .shead .t{flex:1;font-size:15px;font-weight:600;letter-spacing:-.02em}
-.xb{width:30px;height:30px;border-radius:999px;background:var(--subtle2);display:grid;place-items:center;color:var(--fg2)}
+.xb{width:34px;height:34px;flex:none;border-radius:999px;background:var(--subtle2);display:grid;
+  place-items:center;color:var(--fg)}
 .xb:hover{background:var(--bd)}
-.xb svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.xb svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 .sbody{flex:0 1 auto;min-height:0;overflow-y:auto;padding:0 16px 16px;overscroll-behavior:contain}
 .sbody::-webkit-scrollbar{width:0}
-.sfoot{flex:none;padding:12px 16px 20px;border-top:1px solid var(--bd);display:flex;gap:10px;align-items:center}
+.sfoot{flex:none;padding:12px 16px calc(20px + env(safe-area-inset-bottom));border-top:1px solid var(--bd);
+  display:flex;gap:10px;align-items:center}
 
 .dhero{width:100%;height:210px;border-radius:var(--r-card);background:var(--subtle);border:1px solid var(--bd);
   display:grid;place-items:center;overflow:hidden}
@@ -256,21 +261,21 @@ img{display:block;max-width:100%}
 
 <div class="app" id="app">
   <div class="scroll" id="scroll">
-    <div class="hero"><img id="heroImg" src="" alt=""></div>
+    <div class="hero"><img id="heroImg" src="cover.jpg" alt="Bornga barbeque"></div>
     <div class="head">
-      <h1>Bornga</h1>
+      <h1 id="venueName">Bornga</h1>
       <div class="metarow">
-        <span>Korean BBQ</span><span class="dot"></span><span>Brisbane</span>
-        <span class="dot"></span><span>Open until 9:30 PM</span>
+        <span id="mBbq">Korean BBQ</span><span class="dot"></span><span id="mCity">Brisbane</span>
+        <span class="dot"></span><span id="mHours">Open until 9:30 PM</span>
       </div>
       <div class="metarow" style="margin-top:11px">
         <span class="pill" id="meatPill"><span class="tick"></span><span id="meatTxt">0 of 2 meats</span></span>
-        <span class="pill">90 min table</span>
+        <span class="pill" id="pill90">90 min table</span>
       </div>
     </div>
     <div class="note">
-      <b>Two meats and the banchan is refillable</b>
-      <p>Barbeque is served from two meats per table. Ssam vegetables are free. Weekends carry a 10% surcharge, public holidays 15%.</p>
+      <b id="noteT"></b>
+      <p id="noteB"></p>
     </div>
 
     <nav class="cats" id="cats"></nav>
@@ -278,18 +283,20 @@ img{display:block;max-width:100%}
   </div>
 
   <div class="topbar" id="topbar">
-    <span class="b">Bornga</span>
-    <span class="tb">Table 2</span>
+    <span class="b" id="tbName">Bornga</span>
+    <span class="tb" id="tbTable">Table 2</span>
     <button class="ic" id="tFind" aria-label="Search the menu">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.4-3.4"/></svg></button>
     <button class="ic" id="tHist" aria-label="Order history">
       <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4.3l2.8 1.7"/></svg></button>
+    <button class="tb" id="tLang">한국어</button>
   </div>
   <div class="float f-table" id="fTable">Table 2</div>
   <button class="float f-find" id="fFind" aria-label="Search the menu">
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.4-3.4"/></svg></button>
   <button class="float f-hist" id="fHist" aria-label="Order history">
     <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4.3l2.8 1.7"/></svg></button>
+  <button class="float f-lang" id="fLang">한국어</button>
 
   <div class="findbar" id="findbar">
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.4-3.4"/></svg>
@@ -321,7 +328,40 @@ const SRC=id=>IMG[id]||("art/"+id+".webp");
 const fr=id=>FRAMED.has(String(id))?" fr":"";
 const usd=n=>"$"+n.toFixed(2);
 const off=it=>it.was?Math.round((it.was-it.p)/it.was*100):0;
-let cat="bbq",cart={},mode=null,dI=null,dQ=1,query="";
+let cat="bbq",cart={},mode=null,dI=null,dQ=1,query="",lang="en";
+const L={
+ en:{name:"Bornga",table:"Table 2",bbq:"Korean BBQ",city:"Brisbane",hours:"Open until 9:30 PM",other:"한국어",
+  meats:n=>`${n} of 2 meats`,refill:"Banchan refillable",t90:"90 min table",
+  noteT:"Two meats and the banchan is refillable",
+  noteB:"Barbeque is served from two meats per table. Ssam vegetables are free. Weekends carry a 10% surcharge, public holidays 15%.",
+  items:n=>`${n} items`,results:"Results",none:"Nothing matches that.",search:"Search Bornga",cancel:"Cancel",
+  view:"View order",soldout:"Sold out",popular:"Popular",fresh:"New",veg:"Vegetarian",gf:"Gluten free",
+  pairs:"Frequently added together",add:n=>`Add ${n} to order`,off:p=>`${p}% off`,people:n=>`${n} people`,
+  course:"Course",serving:"Serving",serves:"Serves",meatmin:"Meat minimum",counts:n=>`Counts as ${n} of 2`,diet:"Diet",
+  order:"Your order · Table 2",sub:"Subtotal",sur:"Weekend / holiday surcharge",surN:"None applied",total:"Total",
+  send:"Send to kitchen",pay:"Pay at the front counter before leaving.",empty:"Nothing added yet.",
+  callout:"<b>One more meat.</b> Barbeque is served from two meats per table. Add one and every banchan becomes refillable.",
+  hist:"Order history",close:"Close",served:"served",sent:"Sent to the kitchen",inorder:n=>`${n} in order`},
+ ko:{name:"본가",table:"2번 테이블",bbq:"한식 바비큐",city:"브리즈번",hours:"밤 9시 30분까지",other:"ENG",
+  meats:n=>`고기 ${n}/2인분`,refill:"반찬 무한리필",t90:"이용 90분",
+  noteT:"고기 2인분부터 반찬 무한리필",
+  noteB:"구이는 테이블당 2인분부터 주문됩니다. 쌈채소는 무료이며 주말 10%, 공휴일 15% 할증이 붙습니다.",
+  items:n=>`${n}개`,results:"검색 결과",none:"검색 결과가 없습니다.",search:"메뉴 검색",cancel:"취소",
+  view:"주문서 보기",soldout:"품절",popular:"인기",fresh:"신메뉴",veg:"채식",gf:"글루텐프리",
+  pairs:"같이 주문하면 좋아요",add:n=>`${n}개 담기`,off:p=>`${p}% 할인`,people:n=>`${n}인`,
+  course:"분류",serving:"1인분",serves:"인원",meatmin:"구이 인분",counts:n=>`2인분 중 ${n}인분`,diet:"식단",
+  order:"주문서 · 2번 테이블",sub:"소계",sur:"주말·공휴일 할증",surN:"없음",total:"합계",
+  send:"주방으로 보내기",pay:"퇴점 전 카운터에서 결제해 주세요.",empty:"아직 담은 것이 없습니다.",
+  callout:"<b>한 가지만 더.</b> 구이는 테이블당 2인분부터 주문됩니다. 하나만 더 담으시면 반찬이 무한리필됩니다.",
+  hist:"주문 내역",close:"닫기",served:"서빙 완료",sent:"주방으로 전달되었습니다",inorder:n=>`${n}개 담김`}
+};
+const T=()=>L[lang];
+const cName=c=>lang==="en"?c.en:c.ko;
+const iName=it=>lang==="en"?it.n:(it.k||it.n);
+const iSub=it=>{const a=lang==="en"?[it.k]:[it.n];
+  if(it.g)a.push(it.g); if(it.serves)a.push(T().people(it.serves));
+  return a.filter(Boolean).join("  ·  ")};
+const iDesc=it=>lang==="en"?it.d:(it.dk||it.d);
 
 function Spring(apply,k=210){let x=0,v=0,t=0,raf=null,last=0;const c=2*Math.sqrt(k);
   const tick=n=>{const dt=Math.min((n-last)/1000,.032);last=n;v+=(-k*(x-t)-c*v)*dt;x+=v*dt;
@@ -336,7 +376,11 @@ const sp=Spring(y=>{sheet.style.transform=`translateY(${y}px)`;
   $("#bottom").classList.toggle("on",p<.05&&Object.keys(cart).length>0)});
 addEventListener("load",()=>sp.set(closed()));
 requestAnimationFrame(()=>sp.set(closed()));
-const open_=v=>sp.to(0,v),close_=v=>{sp.to(closed(),v);mode=null};
+let sheetHist=false;
+function closeNow(v){sp.to(closed(),v);mode=null}
+function open_(v){if(!sheetHist){sheetHist=true;try{history.pushState({s:1},"")}catch(e){}}sp.to(0,v)}
+function close_(v){if(sheetHist){sheetHist=false;try{history.back();return}catch(e){}}closeNow(v)}
+addEventListener("popstate",()=>{sheetHist=false;closeNow()});
 $("#scrim").onclick=()=>close_();$("#shX").onclick=()=>close_();
 (function(){const g=$("#grip");let id=null,y0=0,x0=0,h=[];
  const rub=(o,d,c=.55)=>(o*d*c)/(d+c*Math.abs(o));
@@ -349,19 +393,19 @@ $("#scrim").onclick=()=>close_();$("#shX").onclick=()=>close_();
  g.addEventListener("pointerup",end);g.addEventListener("pointercancel",end)})();
 
 function badges(it){const a=[];
-  if(it.tag==="best")a.push('<span class="bdg k">Popular</span>');
-  if(it.tag==="new")a.push('<span class="bdg g">New</span>');
-  if(it.v)a.push('<span class="bdg">Vegetarian</span>');
-  if(it.gf)a.push('<span class="bdg">Gluten free</span>');
+  if(it.tag==="best")a.push(`<span class="bdg k">${T().popular}</span>`);
+  if(it.tag==="new")a.push(`<span class="bdg g">${T().fresh}</span>`);
+  if(it.v)a.push(`<span class="bdg">${T().veg}</span>`);
+  if(it.gf)a.push(`<span class="bdg">${T().gf}</span>`);
   return a.slice(0,2).join("")}
 
 function itemHTML(it,i){const q=cart[it.id]||0;
   return `<div class="item${it.out?" out":""}" data-id="${it.id}" style="--i:${i||0}">
    <span class="ileft">
-     <span class="iname" style="display:block">${it.n}</span>
-     <span class="ikr" style="display:block">${[it.k,it.g,it.serves&&it.serves+" people"].filter(Boolean).join("  ·  ")||"&nbsp;"}</span>
-     ${it.d?`<span class="idesc" style="display:-webkit-box">${it.d}</span>`:""}
-     <span class="iprice">${it.out?'<span class="so">Sold out</span>'
+     <span class="iname" style="display:block">${iName(it)}</span>
+     <span class="ikr" style="display:block">${iSub(it)||"&nbsp;"}</span>
+     ${iDesc(it)?`<span class="idesc" style="display:-webkit-box">${iDesc(it)}</span>`:""}
+     <span class="iprice">${it.out?`<span class="so">${T().soldout}</span>`
        :`${usd(it.p)}${it.was?`<s>${usd(it.was)}</s>`:""}`}${badges(it)?`<span class="badges">${badges(it)}</span>`:""}</span>
    </span>
    <span class="ithumb">
@@ -372,19 +416,18 @@ function itemHTML(it,i){const q=cart[it.id]||0;
   </div>`}
 
 function renderCats(){$("#cats").innerHTML=CATS.map(c=>
-  `<button data-cat="${c.id}" aria-current="${c.id===cat}">${c.en}</button>`).join("")}
+  `<button data-cat="${c.id}" aria-current="${c.id===cat}">${cName(c)}</button>`).join("")}
 function renderFeed(animate){
   if(query){const t=query.toLowerCase();
     const hit=M.filter(i=>(i.n+" "+(i.k||"")+" "+(i.d||"")+(i.v?" vegetarian":"")+(i.gf?" gluten free":"")).toLowerCase().includes(t));
     $("#feed").className=animate?"anim":"";
-    $("#feed").innerHTML=`<section class="sec"><h2>Results</h2><div class="cnt">${hit.length} items</div>
-      ${hit.length?hit.map(itemHTML).join(""):'<div class="empty">Nothing matches that.</div>'}</section>`;return}
+    $("#feed").innerHTML=`<section class="sec"><h2>${T().results}</h2><div class="cnt">${T().items(hit.length)}</div>
+      ${hit.length?hit.map(itemHTML).join(""):`<div class="empty">${T().none}</div>`}</section>`;return}
   const c=CATS.find(c=>c.id===cat),its=M.filter(i=>i.c===cat);
   $("#feed").className=animate?"anim":"";
-  $("#feed").innerHTML=`<section class="sec"><h2>${c.en}</h2>
-    <div class="cnt">${its.length} items · ${c.ko}</div>${its.map(itemHTML).join("")}</section>`;
-  const h=its.find(i=>!i.out)||its[0];
-  if(h)$("#heroImg").src=SRC(h.f)}
+  $("#feed").innerHTML=`<section class="sec"><h2>${cName(c)}</h2>
+    <div class="cnt">${T().items(its.length)} · ${lang==="en"?c.ko:c.en}</div>${its.map(itemHTML).join("")}</section>`;
+}
 
 function totals(){let sub=0,meats=0,n=0;
   for(const id in cart){const it=M.find(x=>x.id===id);sub+=it.p*cart[id];n+=cart[id];meats+=(it.meat||0)*cart[id]}
@@ -398,7 +441,7 @@ function renderBar(){const{sub,meats,n}=totals(),ok=meats>=2;
   if(ok&&!lastOk){$("#meatPill").classList.add("beat");setTimeout(()=>$("#meatPill").classList.remove("beat"),460)}
   lastOk=ok;
   $("#meatPill").classList.toggle("ok",ok);
-  $("#meatTxt").textContent=ok?"Banchan refillable":`${meats} of 2 meats`;
+  $("#meatTxt").textContent=ok?T().refill:T().meats(meats);
   $("#cn").textContent=n;
   if(lastSub===null||Math.abs(sub-lastSub)<0.001){$("#cp").textContent=usd(sub)}
   else rollTo($("#cp"),lastSub,sub);
@@ -409,57 +452,57 @@ function refresh(){const y=$("#scroll").scrollTop;renderFeed();$("#scroll").scro
 
 function openDetail(it){mode="detail";dI=it;dQ=cart[it.id]||1;
   const ups=upsFor(it),o=off(it);
-  $("#shT").textContent=CATS.find(c=>c.id===it.c).en;
+  $("#shT").textContent=cName(CATS.find(c=>c.id===it.c));
   $("#sb").innerHTML=`<div class="dhero${fr(it.f)}"><img src="${SRC(it.f)}" alt="${it.n}"></div>
-   <div class="dname">${it.n}</div>${it.k?`<div class="dkr">${it.k}</div>`:""}
-   <div class="dprice">${usd(it.p)}${it.was?`<s>${usd(it.was)}</s><span class="off">${o}% off</span>`:""}</div>
-   ${it.d?`<p class="ddesc">${it.d}</p>`:""}
+   <div class="dname">${iName(it)}</div>${iSub(it)?`<div class="dkr">${iSub(it)}</div>`:""}
+   <div class="dprice">${usd(it.p)}${it.was?`<s>${usd(it.was)}</s><span class="off">${T().off(o)}</span>`:""}</div>
+   ${iDesc(it)?`<p class="ddesc">${iDesc(it)}</p>`:""}
    <dl class="spec">
-    <div><dt>Course</dt><dd>${CATS.find(c=>c.id===it.c).en}</dd></div>
-    ${it.g?`<div><dt>Serving</dt><dd>${it.g}</dd></div>`:""}
-    ${it.serves?`<div><dt>Serves</dt><dd>${it.serves} people</dd></div>`:""}
-    ${it.meat?`<div><dt>Meat minimum</dt><dd>Counts as ${it.meat} of 2</dd></div>`:""}
-    ${(it.v||it.gf)?`<div><dt>Diet</dt><dd>${[it.v?"Vegetarian":"",it.gf?"Gluten free":""].filter(Boolean).join(" · ")}</dd></div>`:""}
+    <div><dt>${T().course}</dt><dd>${cName(CATS.find(c=>c.id===it.c))}</dd></div>
+    ${it.g?`<div><dt>${T().serving}</dt><dd>${it.g}</dd></div>`:""}
+    ${it.serves?`<div><dt>${T().serves}</dt><dd>${T().people(it.serves)}</dd></div>`:""}
+    ${it.meat?`<div><dt>${T().meatmin}</dt><dd>${T().counts(it.meat)}</dd></div>`:""}
+    ${(it.v||it.gf)?`<div><dt>${T().diet}</dt><dd>${[it.v?T().veg:"",it.gf?T().gf:""].filter(Boolean).join(" · ")}</dd></div>`:""}
    </dl>
-   ${ups.length?`<div class="ups"><h4>Frequently added together</h4><div class="urow">${ups.map(u=>
+   ${ups.length?`<div class="ups"><h4>${T().pairs}</h4><div class="urow">${ups.map(u=>
      `<button class="uc" data-add="${u.id}"><span class="b${fr(u.f)}"><img src="${SRC(u.f)}" alt="" loading="lazy"></span>
-      <span class="n">${u.n}</span><span class="p">${usd(u.p)}</span></button>`).join("")}</div></div>`:""}`;
+      <span class="n">${iName(u)}</span><span class="p">${usd(u.p)}</span></button>`).join("")}</div></div>`:""}`;
   $("#sf").innerHTML=`<span class="stp"><button id="mn">−</button><span id="qy">${dQ}</span><button id="pl">+</button></span>
     <button class="cta" id="addb" style="flex:1;justify-content:center"></button>`;
-  const u=()=>{$("#qy").textContent=dQ;$("#addb").innerHTML=`<span class="t" style="flex:none">Add ${dQ} to order</span><span class="p">${usd(dI.p*dQ)}</span>`};u();
+  const u=()=>{$("#qy").textContent=dQ;$("#addb").innerHTML=`<span class="t" style="flex:none">${T().add(dQ)}</span><span class="p">${usd(dI.p*dQ)}</span>`};u();
   $("#pl").onclick=()=>{dQ++;u()};$("#mn").onclick=()=>{if(dQ>1){dQ--;u()}};
-  $("#addb").onclick=()=>{cart[dI.id]=dQ;refresh();close_();toast(dI.n,`${dQ} added`)};
+  $("#addb").onclick=()=>{cart[dI.id]=dQ;refresh();close_();toast(iName(dI),T().inorder(dQ))};
   open_()}
 
 function fillCart(){const{sub,meats,n}=totals();
-  $("#shT").textContent="Your order · Table 2";
+  $("#shT").textContent=T().order;
   let h="";
-  if(!n)h=`<div class="empty">Nothing added yet.</div>`;
+  if(!n)h=`<div class="empty">${T().empty}</div>`;
   else{for(const id in cart){const it=M.find(x=>x.id===id);
     h+=`<div class="ln"><span class="b${fr(it.f)}"><img src="${SRC(it.f)}" alt=""></span>
-      <span class="t">${it.n}${it.k?`<i>${it.k}</i>`:""}</span>
+      <span class="t">${iName(it)}${iSub(it)?`<i>${iSub(it)}</i>`:""}</span>
       <span class="qbox" style="position:static"><button data-dec="${id}">−</button><span>${cart[id]}</span><button data-add="${id}">+</button></span>
       <span class="p">${usd(it.p*cart[id])}</span></div>`}
-   h+=`<div class="sum"><div class="sr"><span>Subtotal</span><span>${usd(sub)}</span></div>
-     <div class="sr"><span>Weekend / holiday surcharge</span><span>None applied</span></div>
-     <div class="sr tot"><span>Total</span><span>${usd(sub)}</span></div></div>`;
-   if(meats>0&&meats<2)h+=`<div class="callout"><b>One more meat.</b> Barbeque is served from two meats per table. Add one and every banchan becomes refillable.</div>`;
-   h+=`<p class="fine">Pay at the front counter before leaving.</p>`}
+   h+=`<div class="sum"><div class="sr"><span>${T().sub}</span><span>${usd(sub)}</span></div>
+     <div class="sr"><span>${T().sur}</span><span>${T().surN}</span></div>
+     <div class="sr tot"><span>${T().total}</span><span>${usd(sub)}</span></div></div>`;
+   if(meats>0&&meats<2)h+=`<div class="callout">${T().callout}</div>`;
+   h+=`<p class="fine">${T().pay}</p>`}
   $("#sb").innerHTML=h;
   $("#sf").innerHTML=`<button class="cta" id="sendb" style="justify-content:center" ${n?"":"disabled"}>
-    <span class="t" style="flex:none">Send to kitchen</span></button>`;
-  const s=$("#sendb");if(s)s.onclick=()=>{cart={};refresh();close_();toast("Sent to the kitchen","Table 2")}}
+    <span class="t" style="flex:none">${T().send}</span></button>`;
+  const s=$("#sendb");if(s)s.onclick=()=>{cart={};refresh();close_();toast(T().sent,T().table)}}
 function openCart(){mode="cart";fillCart();open_()}
 $("#viewCart").onclick=openCart;
 
-$("#fHist").onclick=()=>{mode="hist";$("#shT").textContent="Order history";
+$("#fHist").onclick=()=>{mode="hist";$("#shT").textContent=T().hist;
   $("#sb").innerHTML=`<div class="ln"><span class="b"><img src="${SRC(byName("Bornga Tap Beer 400ml").f)}" alt=""></span>
-     <span class="t">Bornga Tap Beer 400ml<i>2 × $15.00</i></span><span class="p">$30.00</span></div>
+     <span class="t">${iName(byName("Bornga Tap Beer 400ml"))}<i>2 × $15.00</i></span><span class="p">$30.00</span></div>
    <div class="ln"><span class="b"><img src="${SRC(byName("Grilled Corn Cheese").f)}" alt=""></span>
-     <span class="t">Grilled Corn Cheese<i>1 × $17.00</i></span><span class="p">$17.00</span></div>
-   <div class="sum"><div class="sr"><span>19:42 · served</span><span>$47.00</span></div></div>`;
+     <span class="t">${iName(byName("Grilled Corn Cheese"))}<i>1 × $17.00</i></span><span class="p">$17.00</span></div>
+   <div class="sum"><div class="sr"><span>19:42 · ${T().served}</span><span>$47.00</span></div></div>`;
   $("#sf").innerHTML=`<button class="cta" style="justify-content:center;background:var(--subtle2);color:var(--fg)" id="cl">
-    <span class="t" style="flex:none">Close</span></button>`;
+    <span class="t" style="flex:none">${T().close}</span></button>`;
   $("#cl").onclick=()=>close_();open_()};
 
 function setFind(on){$("#findbar").classList.toggle("on",on);
@@ -471,7 +514,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape")setFind(false)});
 document.addEventListener("click",e=>{
   const a=e.target.closest("[data-add]"),d=e.target.closest("[data-dec]");
   if(a){e.stopPropagation();const it=M.find(x=>x.id===a.dataset.add);cart[it.id]=(cart[it.id]||0)+1;
-    refresh();toast(it.n,`${cart[it.id]} in order`);return}
+    refresh();toast(iName(it),T().inorder(cart[it.id]));return}
   if(d){e.stopPropagation();const id=d.dataset.dec;cart[id]--;if(!cart[id])delete cart[id];refresh();return}
   const r=e.target.closest(".item");if(r&&!r.classList.contains("out"))openDetail(M.find(x=>x.id===r.dataset.id))});
 $("#cats").addEventListener("click",e=>{const b=e.target.closest("[data-cat]");if(!b)return;
@@ -486,12 +529,34 @@ $("#scroll").addEventListener("scroll",()=>{
 $("#tFind").onclick=()=>setFind(true);
 $("#tHist").onclick=()=>$("#fHist").click();
 
+function applyChrome(){
+  const t=T();
+  $("#venueName").textContent=t.name;$("#tbName").textContent=t.name;
+  $("#mBbq").textContent=t.bbq;$("#mCity").textContent=t.city;$("#mHours").textContent=t.hours;
+  $("#pill90").textContent=t.t90;
+  $("#fTable").textContent=t.table;$("#tbTable").textContent=t.table;
+  $("#noteT").textContent=t.noteT;$("#noteB").textContent=t.noteB;
+  $("#q").placeholder=t.search;$("#fCancel").textContent=t.cancel;
+  $("#fLang").textContent=t.other;$("#tLang").textContent=t.other;
+  $("#viewCart").querySelector(".t").textContent=t.view;
+}
+function setLang(v){
+  lang=v;try{localStorage.setItem("bornga.lang",v)}catch(e){}
+  document.documentElement.lang=v==="ko"?"ko":"en";
+  applyChrome();renderCats();renderFeed(true);renderBar();
+  if(mode==="cart")fillCart(); else if(mode==="detail"&&dI)openDetail(dI);
+}
+$("#fLang").onclick=()=>setLang(lang==="en"?"ko":"en");
+$("#tLang").onclick=()=>setLang(lang==="en"?"ko":"en");
+
 let tt;function toast(a,b){$("#tm").textContent=a;$("#ts").textContent=b||"";
   $("#toast").classList.add("on");clearTimeout(tt);tt=setTimeout(()=>$("#toast").classList.remove("on"),2000)}
 
 cart[byName("Wagyu Kkot Sal").id]=1;
 cart[byName("Woo Samgyeop").id]=1;
 cart[byName("Bornga Tap Beer 400ml").id]=2;
-renderCats();renderFeed(true);renderBar();
-$("#heroImg").src=SRC(byName("Bornga Beef Lover Set").f);
+try{const sv=localStorage.getItem("bornga.lang");if(sv==="ko"||sv==="en")lang=sv}catch(e){}
+document.documentElement.lang=lang;
+applyChrome();renderCats();renderFeed(true);renderBar();
+
 </script>
