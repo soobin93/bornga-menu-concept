@@ -364,7 +364,9 @@ const iSub=it=>{const a=lang==="en"?[it.k]:[it.n];
 const iDesc=it=>lang==="en"?it.d:(it.dk||it.d);
 
 function Spring(apply,k=210){let x=0,v=0,t=0,raf=null,last=0;const c=2*Math.sqrt(k);
-  const tick=n=>{const dt=Math.min((n-last)/1000,.032);last=n;v+=(-k*(x-t)-c*v)*dt;x+=v*dt;
+  const tick=n=>{
+    let dt=Math.min((n-last)/1000,.25);last=n;          // advance by real time, capped
+    while(dt>0){const h=Math.min(dt,.016);v+=(-k*(x-t)-c*v)*h;x+=v*h;dt-=h}
     if(Math.abs(x-t)<.4&&Math.abs(v)<4){x=t;v=0;apply(x);raf=null;return}apply(x);raf=requestAnimationFrame(tick)};
   return{to(tt,vv){t=tt;if(vv!=null)v=vv;if(raf==null){last=performance.now();raf=requestAnimationFrame(tick)}},
     set(val){if(raf){cancelAnimationFrame(raf);raf=null}x=val;v=0;t=val;apply(x)},get x(){return x}}}
