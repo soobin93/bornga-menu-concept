@@ -368,8 +368,11 @@ function Spring(apply,k=210){let x=0,v=0,t=0,raf=null,last=0;const c=2*Math.sqrt
     let dt=Math.min((n-last)/1000,.25);last=n;          // advance by real time, capped
     while(dt>0){const h=Math.min(dt,.016);v+=(-k*(x-t)-c*v)*h;x+=v*h;dt-=h}
     if(Math.abs(x-t)<.4&&Math.abs(v)<4){x=t;v=0;apply(x);raf=null;return}apply(x);raf=requestAnimationFrame(tick)};
-  return{to(tt,vv){t=tt;if(vv!=null)v=vv;if(raf==null){last=performance.now();raf=requestAnimationFrame(tick)}},
-    set(val){if(raf){cancelAnimationFrame(raf);raf=null}x=val;v=0;t=val;apply(x)},get x(){return x}}}
+  const kick=()=>{last=performance.now();if(raf)cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)};
+  return{to(tt,vv){t=tt;if(vv!=null)v=vv;kick()},                 // always reschedule: a frame
+    set(val){if(raf){cancelAnimationFrame(raf);raf=null}          // dropped while hidden used to
+      x=val;v=0;t=val;apply(x)},                                  // leave the spring dead forever
+    nudge(){if(Math.abs(x-t)>.4)kick()},get x(){return x}}}
 const project=(v,d=.998)=>(v/1000)*d/(1-d);
 const sheet=$("#sheet"),closed=()=>sheet.offsetHeight+60;
 const sp=Spring(y=>{sheet.style.transform=`translateY(${y}px)`;
@@ -388,6 +391,7 @@ function close_(v){
   closeNow(v);                                   // always closes, history is only a bonus
   if(had){try{history.back()}catch(e){}}}
 addEventListener("popstate",()=>{sheetHist=false;closeNow()});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)sp.nudge()});
 $("#scrim").onclick=()=>close_();$("#shX").onclick=()=>close_();
 (function(){const g=$("#grip");let id=null,y0=0,x0=0,h=[];
  const rub=(o,d,c=.55)=>(o*d*c)/(d+c*Math.abs(o));
