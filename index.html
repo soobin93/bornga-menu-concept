@@ -378,8 +378,13 @@ addEventListener("load",()=>sp.set(closed()));
 requestAnimationFrame(()=>sp.set(closed()));
 let sheetHist=false;
 function closeNow(v){sp.to(closed(),v);mode=null}
-function open_(v){if(!sheetHist){sheetHist=true;try{history.pushState({s:1},"")}catch(e){}}sp.to(0,v)}
-function close_(v){if(sheetHist){sheetHist=false;try{history.back();return}catch(e){}}closeNow(v)}
+function open_(v){
+  if(!sheetHist){try{history.pushState({s:1},"");sheetHist=true}catch(e){sheetHist=false}}
+  sp.to(0,v)}
+function close_(v){
+  const had=sheetHist; sheetHist=false;
+  closeNow(v);                                   // always closes, history is only a bonus
+  if(had){try{history.back()}catch(e){}}}
 addEventListener("popstate",()=>{sheetHist=false;closeNow()});
 $("#scrim").onclick=()=>close_();$("#shX").onclick=()=>close_();
 (function(){const g=$("#grip");let id=null,y0=0,x0=0,h=[];
