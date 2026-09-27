@@ -381,11 +381,15 @@ const sp=Spring(y=>{sheet.style.transform=`translateY(${y}px)`;
   $("#bottom").classList.toggle("on",p<.05&&Object.keys(cart).length>0)});
 addEventListener("load",()=>sp.set(closed()));
 requestAnimationFrame(()=>sp.set(closed()));
-let sheetHist=false;
-function closeNow(v){sp.to(closed(),v);mode=null}
+let sheetHist=false,snapT=null;
+/* the spring is the nice path; this timer guarantees the sheet always lands,
+   even if rAF is throttled, suspended or dropped by the browser */
+function guard(target){clearTimeout(snapT);
+  snapT=setTimeout(()=>{if(Math.abs(sp.x-target)>2)sp.set(target)},520)}
+function closeNow(v){const y=closed();sp.to(y,v);guard(y);mode=null}
 function open_(v){
   if(!sheetHist){try{history.pushState({s:1},"");sheetHist=true}catch(e){sheetHist=false}}
-  sp.to(0,v)}
+  sp.to(0,v);guard(0)}
 function close_(v){
   const had=sheetHist; sheetHist=false;
   closeNow(v);                                   // always closes, history is only a bonus
